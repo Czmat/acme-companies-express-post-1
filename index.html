@@ -1,53 +1,54 @@
 <html>
   <head>
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js'></script>
-<style>
-body {
-  font-family: sans-serif;
-}
-</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+    </style>
   </head>
   <body>
-    <div id='root'></div>
-    <script type='text/babel'>
+    <div id="root"></div>
+    <script type="text/babel">
       const { useEffect, useState } = React;
-      const App = ()=> {
+      const App = () => {
+        const [companies, setCompanies] = useState([]);
 
-        const [ companies, setCompanies ] = useState([]);
+        useEffect(() => {}, []);
+
+        const removeComp = async el => {
+          console.log(el);
+          await axios.delete(`/api/companies/${el.id}`);
+          setCompanies([...companies]);
+        };
 
         useEffect(() => {
-          
-        }, [])
-
-        const removeComp = async (el) => {
-          console.log(el)
-          await axios.delete(`/api/companies/${el.id}`)
-          setCompanies([...companies])
-        }
-        
-        useEffect(()=> {
-          axios.get('/api/companies')
-            .then( response => setCompanies(response.data));
+          axios
+            .get('/api/companies')
+            .then(response => setCompanies(response.data));
         }, []);
 
         return (
           <div>
             <h2>Acme Companies - POST JSON</h2>
             <ul>
-              {
-                companies.map( company => {
-                  return (
-                    <li key={ company.id }>
-                      { company.name }
-                      <button onClick={() => removeComp(company)}>X</button>
-                
-                    </li>
-                  );
-                })
-              }
+              {companies.map(company => {
+                return (
+                  <li key={company.id}>
+                    {company.name}
+                    <button onClick={() => removeComp(company)}>X</button>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         );
