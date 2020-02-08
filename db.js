@@ -1,4 +1,5 @@
 const fs = require('fs');
+const uuid = require('uuid');
 
 const readJSON = (file)=> {
   return new Promise((resolve, reject)=> {
@@ -30,6 +31,22 @@ const writeJSON = (file, data)=> {
     });
   });
 };
+
+const create = (file, item) => {
+  return getCompany('./companies.json')
+    .then(items => {
+      item.id = uuid()
+      items.push(item)
+      return writeJSON('./companies.json', items)
+    })
+    .then(() => console.log(item))
+}
+
+const getCompany = (file) => {
+  return readJSON(file)
+}
+
+create('./companies.json', {})
 
 module.exports = {
   readJSON,

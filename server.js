@@ -8,19 +8,17 @@ app.use((req, res, next) => {
   next()
 })
 
-app.delete('/api/companies/:id', (req, res, next) => {
+app.delete('/api/companies/:id',  (req, res, next) => {
   const id = req.params.id;
 
-  db.readJSON('./companies.json').then(items => {
-    
-    return db
-      .writeJSON(
-        './companies.json',
-        items.filter(item => item.id !== id * 1)
-      )
-      .then(data => console.log(data))
-      .catch(next);
-  });
+  try {
+    db.readJSON('./companies.json')
+      .then(items => db.writeJSON('./companies.json', items.filter(item => item.id !== id)))
+    res.sendStatus(204)
+  } catch (ex) {
+    next(ex)
+  }
+
 });
 
 app.get('/api/companies', (req, res, next) => {
