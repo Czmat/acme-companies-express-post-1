@@ -3,15 +3,22 @@ const app = express();
 const db = require('./db');
 const path = require('path');
 
+app.use((req, res, next) => {
+  console.log(req.url, req.method)
+  next()
+})
+
 app.delete('/api/companies/:id', (req, res, next) => {
   const id = req.params.id;
 
   db.readJSON('./companies.json').then(items => {
+    
     return db
       .writeJSON(
         './companies.json',
         items.filter(item => item.id !== id * 1)
       )
+      .then(data => console.log(data))
       .catch(next);
   });
 });

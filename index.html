@@ -27,8 +27,10 @@
 
         const removeComp = async el => {
           console.log(el);
-          await axios.delete(`/api/companies/${el.id}`);
-          setCompanies([...companies]);
+          await axios.delete(`/api/companies/${el.id}`)
+          const newData = await axios.get(`/api/companies/`)
+          
+          setCompanies(newData.data);
         };
 
         useEffect(() => {
