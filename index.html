@@ -15,11 +15,24 @@ body {
     <script type='text/babel'>
       const { useEffect, useState } = React;
       const App = ()=> {
+
         const [ companies, setCompanies ] = useState([]);
+
+        useEffect(() => {
+          
+        }, [])
+
+        const removeComp = async (el) => {
+          console.log(el)
+          await axios.delete(`/api/companies/${el.id}`)
+          setCompanies([...companies])
+        }
+        
         useEffect(()=> {
           axios.get('/api/companies')
             .then( response => setCompanies(response.data));
         }, []);
+
         return (
           <div>
             <h2>Acme Companies - POST JSON</h2>
@@ -29,6 +42,8 @@ body {
                   return (
                     <li key={ company.id }>
                       { company.name }
+                      <button onClick={() => removeComp(company)}>X</button>
+                
                     </li>
                   );
                 })
