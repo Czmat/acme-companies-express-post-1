@@ -243,33 +243,11 @@
     "updatedAt": "2019-08-27T04:48:03.537Z"
   },
   {
-    "id": "4d4e1e87-b281-49fd-b8a1-2e9e229a343d",
-    "name": "Hagenes LLC",
-    "phone": "883-353-9824 x02764",
-    "state": "North Dakota",
-    "catchPhrase": "Optional 3rd generation core",
-    "createdAt": "2019-08-27T04:48:03.537Z",
-    "updatedAt": "2019-08-27T04:48:03.537Z"
+    "name": "acon",
+    "id": "7918dbf1-6a06-45f6-90c4-77c211ae0a7d"
   },
   {
-    "id": "488c766e-58c1-4daa-8499-ecedb06f24d5",
-    "name": "Douglas, Lehner and Beer",
-    "phone": "1-388-213-9610 x47652",
-    "state": "Florida",
-    "catchPhrase": "Realigned cohesive support",
-    "createdAt": "2019-08-27T04:48:03.537Z",
-    "updatedAt": "2019-08-27T04:48:03.537Z"
-  },
-  {
-    "id": "3647b8bd-a502-4680-b2b3-5bb39f6e3bbc"
-  },
-  {
-    "id": "4112fab1-21f7-40e5-91ae-f6dbfd767856"
-  },
-  {
-    "id": "a10c8cce-2a86-4911-9c9e-5dcf9986f199"
-  },
-  {
-    "id": "636a661b-0795-4333-8643-b4bb37222add"
+    "name": "albu",
+    "id": "53d6f5ec-27bf-4e3f-a69d-e50bb3771360"
   }
 ]

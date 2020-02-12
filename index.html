@@ -22,29 +22,42 @@
       const { useEffect, useState } = React;
       const App = () => {
         const [companies, setCompanies] = useState([]);
-        const [name, setName] = useState('')
+        const [name, setName] = useState('');
 
-        useEffect(() => {}, []);
+        //useEffect(() => {}, []);
 
         const removeComp = el => {
-          console.log(el);
-           axios.delete(`/api/companies/${el.id}`)
-           .then(response =>
-             axios.get(`/api/companies/`)
-             .then(response => setCompanies(response.data))
-            )
+          //console.log(el);
+          axios
+            .delete(`/api/companies/${el.id}`)
+            .then(response =>
+              axios
+                .get(`/api/companies/`)
+                .then(response => setCompanies(response.data))
+            );
         };
 
-        const handleSubmit = (e) => {
-          e.preventDefault()
-          axios.post('/api/companies', {"name": name})
-          .then(response =>{
-            console.log(response)
-              axios.get(`/api/companies/`)
-              .then(response => setCompanies(response.data))
-          }
-            )
-        }
+        const createCompany = async e => {
+          e.preventDefault();
+          //console.log(name);
+          const comp = (await axios.post('/api/companies/', { name: name }))
+            .data;
+          // .then(response =>
+          //   axios
+          //     .get(`/api/companies/`)
+          //     .then(response => setCompanies(response.data))
+          // );
+          console.log(comp);
+          setCompanies([comp, ...companies]);
+
+          //.then(response => {
+
+          //setCompanies(compamies);
+          // axios
+          //   .get(`/api/companies/`)
+          //   .then(response => setCompanies(response.data));
+          // });
+        };
 
         useEffect(() => {
           axios
@@ -54,13 +67,15 @@
 
         return (
           <div>
-
             <h2>Acme Companies - POST JSON</h2>
-            
-            <form onSubmit={handleSubmit}>
-              <input onChange={(e) => setName(e.target.value)} type="text"/>
-              <button>Create Company</button>
-            </form>
+
+            <input
+              value={name}
+              onChange={e => setName(e.target.value)}
+              type="text"
+            />
+            {name}
+            <button onClick={createCompany}>Create Company</button>
 
             <ul>
               {companies.map(company => {
@@ -72,8 +87,6 @@
                 );
               })}
             </ul>
-
-
           </div>
         );
       };
