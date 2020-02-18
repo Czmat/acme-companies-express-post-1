@@ -24,10 +24,7 @@
         const [companies, setCompanies] = useState([]);
         const [name, setName] = useState('');
 
-        //useEffect(() => {}, []);
-
         const removeComp = el => {
-          //console.log(el);
           axios
             .delete(`/api/companies/${el.id}`)
             .then(response =>
@@ -39,24 +36,10 @@
 
         const createCompany = async e => {
           e.preventDefault();
-          //console.log(name);
           const comp = (await axios.post('/api/companies/', { name: name }))
             .data;
-          // .then(response =>
-          //   axios
-          //     .get(`/api/companies/`)
-          //     .then(response => setCompanies(response.data))
-          // );
-          console.log(comp);
+
           setCompanies([comp, ...companies]);
-
-          //.then(response => {
-
-          //setCompanies(compamies);
-          // axios
-          //   .get(`/api/companies/`)
-          //   .then(response => setCompanies(response.data));
-          // });
         };
 
         useEffect(() => {

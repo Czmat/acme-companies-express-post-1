@@ -30,13 +30,10 @@ const writeJSON = (file, data) => {
 };
 
 const create = item => {
-  //console.log(item);
   return getCompany('./companies.json')
     .then(items => {
-      // console.log(items);
       item.id = uuid();
       items.push(item);
-      //console.log(item);
       return writeJSON('./companies.json', items);
     })
     .then(() => item);
@@ -45,8 +42,6 @@ const create = item => {
 const getCompany = file => {
   return readJSON(file);
 };
-
-//create('./companies.json', {});
 
 module.exports = {
   readJSON,
